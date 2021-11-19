@@ -13,14 +13,14 @@ public class Program
 		return res.Split(".")[0];
 	}
 	public static int[] Dimensions(int key, string message)
-    {
+    	{
 		int h = message.Length / key + 1;
 		int w = key;
 		int[] res = { w, h };
 		return res;
-    }
+    	}
 	public static string Encrypt(int key, string message)
-    {
+    	{
 		int[] dim = Dimensions(key, message);
 		int width = dim[0], height = dim[1];
 
@@ -42,9 +42,9 @@ public class Program
 
 		int rem = message.Length % key;
 		for (int i = rem; i < width - 1; ++i)
-        {
+		{
 			message = message.Insert((i + 1) * height - 1, "_");
-        } 
+        	} 
 
 		StringBuilder sb = new StringBuilder("");
 		for (int w = 0; w < height; ++w)
@@ -52,7 +52,7 @@ public class Program
 			for (int h = 0; h < width; ++h)
 			{
 				if (h * height + w < message.Length)
-                {
+                		{
 					if (message[h * height + w] == '_')
 						continue;
 					else sb.Append(message[h * height + w]);
@@ -75,17 +75,17 @@ public class Program
 		Console.WriteLine($"Original key is [{key}]");
 
 		for (int i = 2; i < message.Length; i++)
-        {
+        	{
 			var result = Decrypt(i, enc) == message;
 			Console.WriteLine($"Trying key [{i}]: Match: {result}");
 			if (result)
-            {
+            		{
 				Console.WriteLine($"Match has been found at key [{i}]... Generating new string in 10 seconds...");
 				// Could I have set up another variable to check for a solution?
 				// Yes. Yes, I could have. 
 				// I just really wanted to use a goto statement.
 				goto end;
-            }
+            		}
 		}
 
 		Console.WriteLine("No match has been found... Generating new string in 10 seconds...\n(This is a bug, please report it back to me.)");
